@@ -17,22 +17,17 @@ export function QQCardComponent(properties, children) {
       'Invalid directive. ("qqgroup" directive must be leaf type "::qqgroup{link="https://example.com" groupid="123456" title="tester" desc="Desc.."}")',
     ])
 
-  if (
-    !properties.link ||
-    !properties.groupid ||
-    !properties.title ||
-    !properties.desc
-  )
+  if (!properties.link || !properties.groupid || !properties.title)
     return h(
       'div',
       { class: 'hidden' },
-      'Invalid Syntax. ("qqgroup" directive must have "link", "groupid", "title" and "desc" attributes)',
+      'Invalid Syntax. ("qqgroup" directive must have "link", "groupid" and "title" attributes)',
     )
 
   const link = properties.link
   const groupid = properties.groupid
   const title = properties.title
-  const desc = properties.desc
+  const desc = properties.desc || ''
   const cardUuid = `QGC${Math.random().toString(36).slice(-6)}` // Collisions are not important
 
   const nAvatar = h(`div#${cardUuid}-avatar`, { class: 'gc-avatar' })
