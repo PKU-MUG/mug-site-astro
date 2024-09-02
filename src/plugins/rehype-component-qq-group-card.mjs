@@ -57,9 +57,11 @@ export function QQCardComponent(properties, children) {
     `script#${cardUuid}-script`,
     { type: 'text/javascript', defer: true },
     `
-      const avatarEl = document.getElementById('${cardUuid}-avatar');
-      avatarEl.style.backgroundImage = 'url(https://api.qoc.cc/api/quntx?qq=${groupid})';
-      avatarEl.style.backgroundColor = 'transparent';
+      (() => {
+        const avatarEl = document.getElementById('${cardUuid}-avatar');
+        avatarEl.style.backgroundImage = 'url(https://api.qoc.cc/api/quntx?qq=${groupid})';
+        avatarEl.style.backgroundColor = 'transparent';
+      })();
     `,
   )
 
