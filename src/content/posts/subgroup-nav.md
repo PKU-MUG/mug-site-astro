@@ -8,10 +8,9 @@ draft: false
 ---
 
 ::qqgroup{link="https://qm.qq.com/q/qqL7s388uG" groupid="798651768" title="舞萌/maimai 分群" desc="NyarX 哥哥好帅"}
-<!-- ::qqgroup{link="https://qm.qq.com/q/qqL7s388uG" groupid="812470128" title="中二/CHUNITHM 分群" desc=""}
-::qqgroup{link="https://qm.qq.com/q/qqL7s388uG" groupid="824125281" title="Phigros 分群" desc=""}
-::qqgroup{link="https://qm.qq.com/q/qqL7s388uG" groupid="192936571" title="Arcaea 分群" desc=""}
-::qqgroup{link="https://qm.qq.com/q/qqL7s388uG" groupid="244894195" title="Malody & osu!mania 分群" desc=""}
-::qqgroup{link="https://qm.qq.com/q/qqL7s388uG" groupid="733872873" title="啤酒烧烤/Project Sekai/pjsk 分群" desc=""}
-::qqgroup{link="https://qm.qq.com/q/qqL7s388uG" groupid="795977916" title="调戏bot小游戏群" desc=""} -->
-
+::qqgroup{link="https://qm.qq.com/q/lwHYiimoOm" groupid="812470128" title="中二/CHUNITHM 分群"}
+::qqgroup{link="https://qm.qq.com/q/rJuQMp2vSM" groupid="824125281" title="Phigros 分群"}
+::qqgroup{link="https://qm.qq.com/q/zoIltEJrCE" groupid="192936571" title="Arcaea 分群"}
+::qqgroup{link="https://qm.qq.com/q/rg4ptpfv3i" groupid="244894195" title="Malody & osu!mania 分群"}
+::qqgroup{link="https://qm.qq.com/q/J6A7FfS8My" groupid="733872873" title="啤酒烧烤/Project Sekai/pjsk 分群"}
+::qqgroup{link="https://qm.qq.com/q/wWLbcEQyDA" groupid="795977916" title="调戏bot小游戏群"}
