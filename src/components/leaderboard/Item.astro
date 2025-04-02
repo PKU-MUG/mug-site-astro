@@ -1,0 +1,39 @@
+---
+type Props = { name: string; score: string; rank: number }; // 定义 Props 类型
+
+const { name, score, rank }: Props = Astro.props;
+---
+
+<div class="item">
+    <div class="rank">#{rank}</div>
+    <div class="name">{name}</div>
+    <div class="score">{score}</div>
+</div>
+
+<style>
+    .item {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1rem;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        text-align: left;
+    }
+    .rank {
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin-right: 1rem;
+    }
+    .name {
+        flex: 1;
+        font-size: 1.2rem;
+        margin-right: 1rem;
+    }
+    .score {
+        color: #555;
+        font-size: 1.5rem; /* 调大分数字体 */
+        font-weight: bold; /* 加粗分数 */
+    }
+</style>

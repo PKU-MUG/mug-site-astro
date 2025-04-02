@@ -1,0 +1,29 @@
+---
+import Board from "@components/leaderboard/Board.astro";
+import SimpleGridLayout from "@layouts/SimpleGridLayout.astro";
+import csvData from "../../../../data/wmc1st.csv?raw";
+import { parseCSV, type Submission } from "../model";
+
+const submissions: Submission[] = parseCSV(csvData);
+
+const leaderboardData = submissions
+    .map(({ gameId, group, score }) => ({
+        name: gameId,
+        group,
+        score,
+    }))
+    .filter((item) => item.group === "3");
+leaderboardData.sort((a, b) => b.score - a.score);
+---
+
+<SimpleGridLayout>
+    <h1 class="text-3xl font-bold text-center mb-4">
+        WMC 1st 萌新组（C 组）预选赛结果
+    </h1>
+    <Board
+        data={leaderboardData.map(({ name, score }) => ({
+            name,
+            score: `${score.toFixed(4)}%`,
+        }))}
+    />
+</SimpleGridLayout>
