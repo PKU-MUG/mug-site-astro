@@ -144,5 +144,6 @@ export default defineConfig({
         },
       },
     },
+    assetsInclude: ['**/*.csv'],
   },
 })
