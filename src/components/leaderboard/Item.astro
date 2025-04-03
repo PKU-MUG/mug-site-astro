@@ -4,7 +4,7 @@ type Props = { name: string; score: string; rank: number } // 定义 Props 类�
 const { name, score, rank }: Props = Astro.props
 ---
 
-<div class="item">
+<div class="item text-black/90 dark:text-white/90">
     <div class="rank">#{rank}</div>
     <div class="name">{name}</div>
     <div class="score">{score}</div>
@@ -32,8 +32,8 @@ const { name, score, rank }: Props = Astro.props
         margin-right: 1rem;
     }
     .score {
-        color: #555;
-        font-size: 1.5rem; /* 调大分数字体 */
-        font-weight: bold; /* 加粗分数 */
+        font-family: monospace;
+        font-size: 1.5rem;
+        font-weight: bold;
     }
 </style>

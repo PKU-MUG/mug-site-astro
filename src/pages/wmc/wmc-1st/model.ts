@@ -3,7 +3,7 @@
  */
 export type Submission = {
     id: number
-    submitTime: string
+    submitTime: Date
     usedTime: string
     source: string
     sourceDetail: string
@@ -45,8 +45,8 @@ export const parseCSV = (csv: string): Submission[] => {
                 : (['disk', fileName] as const)
         if (score === '') continue
         submissions.push({
-            id: parseInt(id),
-            submitTime,
+            id: Number.parseInt(id),
+            submitTime: new Date(submitTime),
             usedTime,
             source,
             sourceDetail,
@@ -56,7 +56,7 @@ export const parseCSV = (csv: string): Submission[] => {
             group,
             screenshot,
             video,
-            score: parseFloat(score.replace(/%/g, '')),
+            score: Number.parseFloat(score.replace(/%/g, '')),
         })
     }
 
@@ -71,9 +71,9 @@ export const parseCSV = (csv: string): Submission[] => {
     }
 
     const result: Submission[] = []
-    for (const [key, group] of grouped.entries()) {
+    for (const group of grouped.values()) {
         const maxSubmission = group.reduce((prev, curr) =>
-            prev.score > curr.score ? prev : curr,
+            prev.submitTime > curr.submitTime ? prev : curr,
         )
         result.push(maxSubmission)
     }
