@@ -1,10 +1,11 @@
 ---
-import Board from "@components/leaderboard/Board.astro";
-import SimpleGridLayout from "@layouts/SimpleGridLayout.astro";
-import csvData from "../../../../data/wmc1st.csv?raw";
-import { parseCSV, type Submission } from "../model";
+import Board from '@components/leaderboard/Board.astro'
+import Title from '@components/posts/Title.astro'
+import SimpleGridLayout from '@layouts/SimpleGridLayout.astro'
+import csvData from '../../../../data/wmc1st.csv?raw'
+import { type Submission, parseCSV } from '../model'
 
-const submissions: Submission[] = parseCSV(csvData);
+const submissions: Submission[] = parseCSV(csvData)
 
 const leaderboardData = submissions
     .map(({ gameId, group, score }) => ({
@@ -12,14 +13,12 @@ const leaderboardData = submissions
         group,
         score,
     }))
-    .filter((item) => item.group === "1");
-leaderboardData.sort((a, b) => b.score - a.score);
+    .filter(item => item.group === '1')
+leaderboardData.sort((a, b) => b.score - a.score)
 ---
 
 <SimpleGridLayout>
-    <h1 class="text-3xl font-bold text-center mb-4">
-        WMC 1st 高难组（A 组）预选赛结果
-    </h1>
+    <Title title="WMC 1st 高难组（A 组）预选赛结果" center />
     <Board
         data={leaderboardData.map(({ name, score }) => ({
             name,

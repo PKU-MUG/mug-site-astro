@@ -11,12 +11,12 @@ import { url } from '../utils/url-utils'
 const className = Astro.props.class
 
 let links: NavBarLink[] = navBarConfig.links.map(
-  (item: NavBarLink | LinkPreset): NavBarLink => {
-    if (typeof item === 'number') {
-      return LinkPresets[item]
-    }
-    return item
-  },
+    (item: NavBarLink | LinkPreset): NavBarLink => {
+        if (typeof item === 'number') {
+            return LinkPresets[item]
+        }
+        return item
+    },
 )
 ---
 <div id="navbar" class="sticky top-0 z-50 onload-animation">

@@ -8,24 +8,27 @@ import sanitizeHtml from 'sanitize-html'
 const parser = new MarkdownIt()
 
 export async function GET(context: APIContext) {
-  const blog = await getSortedPosts()
+    const blog = await getSortedPosts()
 
-  return rss({
-    title: siteConfig.title,
-    description: siteConfig.subtitle || 'No description',
-    site: context.site ?? 'https://fuwari.vercel.app',
-    items: blog.map(post => {
-      const body = typeof post.data.body === 'string' ? post.data.body : ''
-      return {
-        title: post.data.title,
-        pubDate: post.data.published,
-        description: post.data.description || '',
-        link: `/posts/${post.slug}/`,
-        content: sanitizeHtml(parser.render(body), {
-          allowedTags: sanitizeHtml.defaults.allowedTags.concat(['img']),
+    return rss({
+        title: siteConfig.title,
+        description: siteConfig.subtitle || 'No description',
+        site: context.site ?? 'https://fuwari.vercel.app',
+        items: blog.map(post => {
+            const body =
+                typeof post.data.body === 'string' ? post.data.body : ''
+            return {
+                title: post.data.title,
+                pubDate: post.data.published,
+                description: post.data.description || '',
+                link: `/posts/${post.slug}/`,
+                content: sanitizeHtml(parser.render(body), {
+                    allowedTags: sanitizeHtml.defaults.allowedTags.concat([
+                        'img',
+                    ]),
+                }),
+            }
         }),
-      }
-    }),
-    customData: `<language>${siteConfig.lang}</language>`,
-  })
+        customData: `<language>${siteConfig.lang}</language>`,
+    })
 }

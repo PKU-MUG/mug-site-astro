@@ -1,10 +1,10 @@
 ---
-import Item from "./Item.astro";
+import Item from './Item.astro'
 
-type DataItem = { name: string; score: string }; // 定义单个数据项类型
-type Props = { data: DataItem[] }; // 定义 Props 类型
+type DataItem = { name: string; score: string } // 定义单个数据项类型
+type Props = { data: DataItem[] } // 定义 Props 类型
 
-const { data }: Props = Astro.props; // 接收排行榜数据
+const { data }: Props = Astro.props // 接收排行榜数据
 ---
 
 <div class="board">

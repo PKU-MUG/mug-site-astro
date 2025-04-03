@@ -1,22 +1,22 @@
 ---
-import Footer from "@components/Footer.astro";
-import Navbar from "@components/Navbar.astro";
-import BackToTop from "@components/control/BackToTop.astro";
-import Layout from "./Layout.astro";
-import { Icon } from "astro-icon/components";
-import { siteConfig } from "../config";
+import Footer from '@components/Footer.astro'
+import Navbar from '@components/Navbar.astro'
+import BackToTop from '@components/control/BackToTop.astro'
+import Layout from './Layout.astro'
+import { Icon } from 'astro-icon/components'
+import { siteConfig } from '../config'
 
 interface Props {
-    title?: string;
-    banner?: string;
-    description?: string;
-    lang?: string;
+    title?: string
+    banner?: string
+    description?: string
+    lang?: string
 }
 
-const { title, banner, description, lang } = Astro.props;
+const { title, banner, description, lang } = Astro.props
 const hasBannerCredit =
-    siteConfig.banner.enable && siteConfig.banner.credit.enable;
-const hasBannerLink = !!siteConfig.banner.credit.url;
+    siteConfig.banner.enable && siteConfig.banner.credit.enable
+const hasBannerLink = !!siteConfig.banner.credit.url
 ---
 
 <Layout title={title} banner={banner} description={description} lang={lang}>
