@@ -22,8 +22,8 @@ const { data }: Props = Astro.props // 接收排行榜数据
         padding: 1rem;
     }
     .items {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        display: flex;
+        flex-direction: column;
         gap: 1rem;
     }
 </style>
