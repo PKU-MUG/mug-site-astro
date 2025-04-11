@@ -1,0 +1,39 @@
+---
+interface Props {
+    activated: 'A' | 'B' | 'C'
+}
+
+const classNames = (activated: boolean) => {
+    return activated
+        ? 'btn-card disabled rounded-lg cursor-not-allowed text-center py-1'
+        : 'btn-regular rounded-lg py-1'
+}
+
+const { activated } = Astro.props
+---
+<div class="flex space-x-4 w-full">
+    <a 
+        class:list={classNames(activated === 'A')}
+        href="../A/" 
+        aria-disabled={activated === 'A'}
+        style="flex: 1"
+    >
+        A 组
+    </a>
+    <a 
+        class:list={classNames(activated === 'B')}
+        href="../B/" 
+        aria-disabled={activated === 'B'}
+        style="flex: 1"
+    >
+        B 组
+    </a>
+    <a 
+        class:list={classNames(activated === 'C')}
+        href="../C/" 
+        aria-disabled={activated === 'C'}
+        style="flex: 1"
+    >
+        C 组
+    </a>
+</div>

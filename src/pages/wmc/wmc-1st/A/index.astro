@@ -3,6 +3,7 @@ import Board from '@components/leaderboard/Board.astro'
 import Title from '@components/posts/Title.astro'
 import SimpleGridLayout from '@layouts/SimpleGridLayout.astro'
 import csvData from '../../../../data/wmc1st.csv?raw'
+import Footer from '../Footer.astro'
 import { type Submission, parseCSV } from '../model'
 
 const submissions: Submission[] = parseCSV(csvData)
@@ -17,7 +18,7 @@ const leaderboardData = submissions
 leaderboardData.sort((a, b) => b.score - a.score)
 ---
 
-<SimpleGridLayout>
+<SimpleGridLayout title='WMC 1st 预选结果'>
     <Title title="WMC 1st 高难组（A 组）预选赛结果" center />
     <Board
         data={leaderboardData.map(({ name, score }) => ({
@@ -25,4 +26,5 @@ leaderboardData.sort((a, b) => b.score - a.score)
             score: `${score.toFixed(4)}%`,
         }))}
     />
+    <Footer activated='A'/>
 </SimpleGridLayout>
