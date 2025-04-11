@@ -13,7 +13,7 @@ const leaderboardData = submissions
         group,
         score,
     }))
-    .filter(item => item.group === 'B 组')
+    .filter(item => item.group === 'B 组' || item.group === '2')
 leaderboardData.sort((a, b) => b.score - a.score)
 ---
 
