@@ -16,6 +16,13 @@ export type Submission = {
     score: number
 }
 
+const toFullWidth = (str: string): string => {
+    return str.replace(/[\u0021-\u007E]/g, char => {
+        const code = char.charCodeAt(0)
+        return String.fromCharCode(code + 0xfee0)
+    })
+}
+
 export const parseCSV = (csv: string): Submission[] => {
     const lines = csv.split('\n').slice(1)
     const submissions: Submission[] = []
@@ -51,7 +58,7 @@ export const parseCSV = (csv: string): Submission[] => {
             source,
             sourceDetail,
             ip,
-            gameId,
+            gameId: toFullWidth(gameId),
             qq,
             group,
             screenshot,
@@ -60,7 +67,6 @@ export const parseCSV = (csv: string): Submission[] => {
         })
     }
 
-    // Take max grouping by qq & group
     const grouped = new Map<string, Submission[]>()
     for (const submission of submissions) {
         const key = `${submission.qq}-${submission.group}`
