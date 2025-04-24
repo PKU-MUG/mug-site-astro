@@ -1,39 +1,22 @@
 ---
-type Props = { name: string; score: string; rank: number } // 定义 Props 类型
+type Props = { name: string; score: string; rank: number; highlighted?: boolean } // 定义 Props 类型
 
-const { name, score, rank }: Props = Astro.props
+const { name, score, rank, highlighted }: Props = Astro.props
 ---
 
-<div class="item text-black/90 dark:text-white/90">
-    <div class="rank">#{rank}</div>
-    <div class="name">{name}</div>
-    <div class="score">{score}</div>
+<div class:list={["item text-black/90 dark:text-white/90 flex flex-row items-center justify-between p-4 border-2 border-solid rounded-lg text-left", { "item-highlighted": Boolean(highlighted) }]}>
+    <div class="rank font-mono font-bold text-lg text-center mr-2 flex-none">#{rank}</div>
+    <div class="name flex-1 text-left text-lg ml-2">{name}</div>
+    <div class="score font-mono font-bold text-2xl text-right">{score}</div>
 </div>
 
 <style>
     .item {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-        padding: 1rem;
-        border: 2px solid var(--line-color);
-        border-radius: 8px;
-        text-align: left;
+        border: 2px solid var(--meta-divider);
     }
-    .rank {
-        font-size: 1.5rem;
-        font-weight: bold;
-        margin-right: 1rem;
-    }
-    .name {
-        flex: 1;
-        font-size: 1.2rem;
-        margin-right: 1rem;
-    }
-    .score {
-        font-family: monospace;
-        font-size: 1.5rem;
-        font-weight: bold;
+
+    .item-highlighted {
+        background-color: var(--card-bg);
+        border: 2px solid var(--title-active);
     }
 </style>

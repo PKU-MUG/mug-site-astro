@@ -13,17 +13,24 @@ const leaderboardData = submissions
         name: gameId,
         group,
         score,
+        highlighted: false,
     }))
     .filter(item => item.group === 'C 组' || item.group === '3')
 leaderboardData.sort((a, b) => b.score - a.score)
+for (let i = 0; i < 8 && i < leaderboardData.length; i++) {
+    if (leaderboardData[i].group === 'C 组') {
+        leaderboardData[i].highlighted = true
+    }
+}
 ---
 
-<SimpleGridLayout>
-    <Title title="WMC 1st 萌新组（C 组）预选赛结果" center />
+<SimpleGridLayout title='WMC 1st 预选结果'>
     <Board
-        data={leaderboardData.map(({ name, score }) => ({
+        title="WMC 1st 萌新组（C 组）预选赛结果"
+        data={leaderboardData.map(({ name, score, highlighted }) => ({
             name,
             score: `${score.toFixed(4)}%`,
+            highlighted,
         }))}
     />
     <Footer activated='C'/>
