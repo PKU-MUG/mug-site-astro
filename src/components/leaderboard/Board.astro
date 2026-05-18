@@ -7,7 +7,7 @@ type Props = { title: string; data: DataItem[] } // 定义 Props 类型
 
 const { title, data }: Props = Astro.props // 接收排行榜数据
 ---
-<div class="p-4">
+<div class="px-4 md:px-0 py-4">
     <div class="flex justify-center mb-4">
         <div class="btn-regular disabled rounded-lg pt-3 px-8 w-max">
             <Title title={title} center />
