@@ -1,5 +1,10 @@
 ---
-type Props = { name: string; score: string; rank: number; highlighted?: boolean } // 定义 Props 类型
+type Props = {
+    name: string
+    score: string
+    rank: number
+    highlighted?: boolean
+} // 定义 Props 类型
 
 const { name, score, rank, highlighted }: Props = Astro.props
 ---

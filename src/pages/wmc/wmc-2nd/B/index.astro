@@ -1,0 +1,19 @@
+---
+import Board from '@components/leaderboard/Board.astro'
+import SimpleGridLayout from '@layouts/SimpleGridLayout.astro'
+import GroupNav from '@components/wmc/GroupNav.astro'
+import config, { parseWMCCSV, toLeaderboard } from '@/data/wmc/002/config'
+import csvRaw from '@/data/wmc/002/data.csv?raw'
+
+const submissions = parseWMCCSV(csvRaw)
+const groupSubmissions = submissions.filter(s => s.group === 'B')
+const leaderboardData = toLeaderboard(groupSubmissions)
+---
+
+<SimpleGridLayout title={`${config.title} 预选结果`}>
+	<Board
+		title={`${config.title} B 组预选赛结果`}
+		data={leaderboardData}
+	/>
+	<GroupNav edition="wmc-2nd" activeGroup="B" groups={config.groups} />
+</SimpleGridLayout>

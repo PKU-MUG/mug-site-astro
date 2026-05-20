@@ -1,37 +1,23 @@
 ---
 import Board from '@components/leaderboard/Board.astro'
-import Title from '@components/posts/Title.astro'
 import SimpleGridLayout from '@layouts/SimpleGridLayout.astro'
-import csvData from '../../../../data/wmc1st.csv?raw'
-import Footer from '../Footer.astro'
-import { type Submission, parseCSV } from '../model'
+import GroupNav from '@components/wmc/GroupNav.astro'
+import config, {
+    parseWMCCSV,
+    dedupeByLastSubmission,
+    toLeaderboard,
+} from '@/data/wmc/001/config'
+import csvRaw from '@/data/wmc/001/data.csv?raw'
 
-const submissions: Submission[] = parseCSV(csvData)
-
-const leaderboardData = submissions
-    .map(({ gameId, group, score }) => ({
-        name: gameId,
-        group,
-        score,
-        highlighted: false,
-    }))
-    .filter(item => item.group === 'B 组' || item.group === '2')
-leaderboardData.sort((a, b) => b.score - a.score)
-for (let i = 0; i < 8 && i < leaderboardData.length; i++) {
-    if (leaderboardData[i].group === 'B 组') {
-        leaderboardData[i].highlighted = true
-    }
-}
+const submissions = dedupeByLastSubmission(parseWMCCSV(csvRaw))
+const groupSubmissions = submissions.filter(s => s.group === 'B 组')
+const leaderboardData = toLeaderboard(groupSubmissions)
 ---
 
-<SimpleGridLayout title='WMC 1st 预选结果'>
-    <Board
-        title="WMC 1st 娱乐组（B 组）预选赛结果"
-        data={leaderboardData.map(({ name, score, highlighted }) => ({
-            name,
-            score: `${score.toFixed(4)}%`,
-            highlighted,
-        }))}
-    />
-    <Footer activated='B'/>
+<SimpleGridLayout title={`${config.title} 预选结果`}>
+	<Board
+		title={`${config.title} 娱乐组（B 组）预选赛结果`}
+		data={leaderboardData}
+	/>
+	<GroupNav edition="wmc-1st" activeGroup="B" groups={config.groups} />
 </SimpleGridLayout>

@@ -1,0 +1,28 @@
+---
+interface Props {
+    edition: string
+    activeGroup: string
+    groups: readonly string[]
+}
+
+const classNames = (activated: boolean) => {
+    return activated
+        ? 'btn-card disabled rounded-lg cursor-not-allowed text-center py-1'
+        : 'btn-regular rounded-lg py-1'
+}
+
+const { edition, activeGroup, groups } = Astro.props
+---
+
+<div class="flex space-x-4 w-full">
+    {groups.map(group => (
+        <a
+            class:list={classNames(activeGroup === group)}
+            href={`../${group}/`}
+            aria-disabled={activeGroup === group}
+            style="flex: 1"
+        >
+            {group} 组
+        </a>
+    ))}
+</div>
