@@ -1,4 +1,4 @@
-import { parseCSV, type LeaderboardItem, processLeaderboard } from '../types'
+import { parseCSV, type LeaderboardItem } from '../types'
 
 export type Submission = {
     id: string
@@ -9,6 +9,23 @@ export type Submission = {
     score2: number
     score3: number
     scoreAll: number
+    timeLastTrack: string
+}
+
+function parseTrackTime(value: string): number {
+    const match = value.match(
+        /^(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2})$/,
+    )
+    if (!match) return Number.POSITIVE_INFINITY
+
+    const [, year, month, day, hour, minute] = match
+    return new Date(
+        Number(year),
+        Number(month) - 1,
+        Number(day),
+        Number(hour),
+        Number(minute),
+    ).getTime()
 }
 
 export function parseWMCCSV(csv: string): Submission[] {
@@ -21,6 +38,7 @@ export function parseWMCCSV(csv: string): Submission[] {
         score2: parseFloat(row.get('score2') ?? '0'),
         score3: parseFloat(row.get('score3') ?? '0'),
         scoreAll: parseFloat(row.get('score_all') ?? '0'),
+        timeLastTrack: row.get('time_last_track') ?? '',
     }))
 }
 
@@ -28,12 +46,17 @@ export function toLeaderboard(
     submissions: Submission[],
     topN?: number,
 ): LeaderboardItem[] {
-    return processLeaderboard(
-        submissions,
-        s => s.scoreAll,
-        s => s.id,
-        topN,
-    )
+    const highlightLimit = topN ?? 8
+    const sorted = [...submissions].sort((a, b) => {
+        if (b.scoreAll !== a.scoreAll) return b.scoreAll - a.scoreAll
+        return parseTrackTime(a.timeLastTrack) - parseTrackTime(b.timeLastTrack)
+    })
+
+    return sorted.map((submission, index) => ({
+        name: submission.id,
+        score: `${submission.scoreAll.toFixed(4)}%`,
+        highlighted: index < highlightLimit,
+    }))
 }
 
 export default {
