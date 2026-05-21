@@ -12,6 +12,12 @@ export type Submission = {
     timeLastTrack: string
 }
 
+function toFullWidth(value: string): string {
+    return value.replace(/[!-~]/g, char =>
+        String.fromCharCode(char.charCodeAt(0) + 0xfee0),
+    )
+}
+
 function parseTrackTime(value: string): number {
     const match = value.match(
         /^(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2})$/,
@@ -30,7 +36,7 @@ function parseTrackTime(value: string): number {
 
 export function parseWMCCSV(csv: string): Submission[] {
     return parseCSV(csv, row => ({
-        id: row.get('ID') ?? '',
+        id: toFullWidth(row.get('ID') ?? ''),
         nickname: row.get('nickname') ?? '',
         qq: row.get('qq') ?? '',
         group: row.get('group') ?? '',
