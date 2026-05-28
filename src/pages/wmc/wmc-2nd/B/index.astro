@@ -7,7 +7,7 @@ import csvRaw from '@/data/wmc/002/data.csv?raw'
 
 const submissions = parseWMCCSV(csvRaw)
 const groupSubmissions = submissions.filter(s => s.group === 'B')
-const leaderboardData = toLeaderboard(groupSubmissions)
+const leaderboardData = toLeaderboard(groupSubmissions, 16)
 ---
 
 <SimpleGridLayout title={`${config.title} 预选结果`}>
